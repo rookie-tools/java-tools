@@ -1,4 +1,4 @@
-package response;
+package com.rookie.tools.response;
 
 import lombok.Getter;
 
@@ -17,7 +17,12 @@ public enum ResponseCode {
     /**
      * 失败返回-1，其他错误自行定义
      */
-    fail(-1, "失败");
+    fail(-1, "失败"),
+
+    /**
+     * 异常返回-100，其他异常自行定义
+     */
+    exception(-100, "异常");
 
     @Getter
     private Integer code;

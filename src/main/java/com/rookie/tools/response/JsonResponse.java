@@ -3,8 +3,10 @@
  * <p>
  * Copyright 2018 Stalary.
  */
-package response;
+package com.rookie.tools.response;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.LinkedHashMap;
 
 
@@ -17,7 +19,8 @@ import java.util.LinkedHashMap;
  *     "msg": "", // 返回的信息，可以返回错误信息等
  *     "data": { // 返回的数据
  *
- *     }
+ *     },
+ *     "exception": [] //错误堆栈，无错误时不返回
  * }
  * @author lirongqian
  * @since 2018/05/31
@@ -71,7 +74,27 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
         return response;
     }
 
-    public static void main(String[] args) {
-        System.out.println(JsonResponse.fail());
+    /**
+     * 返回异常
+     */
+    public static JsonResponse exception(Exception e) {
+        return exception(ResponseCode.exception.getCode(), e);
     }
+
+    public static JsonResponse exception(Integer exceptionCode, Exception e) {
+        JsonResponse response = new JsonResponse();
+        response.put("success", false);
+        response.put("code", exceptionCode);
+        response.put("msg", null);
+        response.put("data", null);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        response.put("exception", sw.toString());
+        return response;
+    }
+
+    public static void main(String[] args) {
+
+    }
+
 }
