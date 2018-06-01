@@ -7,21 +7,24 @@ package com.rookie.tools.response;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
  * JsonResponse
  * Json格式的返回数据
  * {
- *     "success": true, // 是否为正常返回，前端可读取该方法来判断是否返回正常
- *     "code": 0, // 返回的状态码，默认为0，即正常
- *     "msg": "", // 返回的信息，可以返回错误信息等
- *     "data": { // 返回的数据
- *
- *     },
- *     "exception": [] //错误堆栈，无错误时不返回
+ * "success": true, // 是否为正常返回，前端可读取该方法来判断是否返回正常
+ * "code": 0, // 返回的状态码，默认为0，即正常
+ * "msg": "", // 返回的信息，可以返回错误信息等
+ * "data": { // 返回的数据
+ * <p>
+ * },
+ * "exception": [] //错误堆栈，无错误时不返回
  * }
+ *
  * @author lirongqian
  * @since 2018/05/31
  */
@@ -34,6 +37,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 返回成功
+     *
      * @return
      */
     public static JsonResponse success() {
@@ -47,7 +51,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
     public static JsonResponse success(Object data, String msg) {
         JsonResponse response = new JsonResponse();
         response.put("success", true);
-        response.put("code", ResponseCode.success.getCode());
+        response.put("code", ResponseCodeEnum.SUCCESS.getCode());
         response.put("msg", msg);
         response.put("data", data);
         return response;
@@ -55,6 +59,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 返回错误
+     *
      * @return
      */
     public static JsonResponse fail() {
@@ -62,7 +67,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
     }
 
     public static JsonResponse fail(String msg) {
-        return fail(ResponseCode.fail.getCode(), msg);
+        return fail(ResponseCodeEnum.FAIL.getCode(), msg);
     }
 
     public static JsonResponse fail(Integer errorCode, String msg) {
@@ -78,7 +83,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
      * 返回异常
      */
     public static JsonResponse exception(Exception e) {
-        return exception(ResponseCode.exception.getCode(), e);
+        return exception(ResponseCodeEnum.EXCEPTION.getCode(), e);
     }
 
     public static JsonResponse exception(Integer exceptionCode, Exception e) {
@@ -93,8 +98,48 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
         return response;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 获取data中的数据
+     *
+     * @return
+     */
+    public Object getData() {
+        return this.get("data");
+    }
 
+    /**
+     * 设置data中的数据
+     */
+    public JsonResponse dataPut(String key, Object value) {
+        mapData().put(key, value);
+        return this;
+    }
+
+    public JsonResponse dataPutAll(Map<?, ?> maps) {
+        mapData().putAll(maps);
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<Object, Object> mapData() {
+        // 首先获取data
+        Object raw = this.get("data");
+        Map<Object, Object> data;
+        if (raw instanceof Map) {
+            return (Map<Object, Object>) raw;
+        }
+        if (raw == null) {
+            // data为null时，则
+            data = new HashMap<>();
+            this.put("data", data);
+            return data;
+        }
+        throw new IllegalArgumentException("data [" + raw
+                + "] is not instanceof map, can not put");
+    }
+
+
+    public static void main(String[] args) {
     }
 
 }

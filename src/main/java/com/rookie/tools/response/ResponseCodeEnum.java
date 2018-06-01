@@ -7,22 +7,22 @@ import lombok.Getter;
  * @description 定义返回的状态码
  * @date 2018/5/31
  */
-public enum ResponseCode {
+public enum ResponseCodeEnum {
 
     /**
      * 成功返回0
      */
-    success(0, "成功"),
+    SUCCESS(0, "成功"),
 
     /**
      * 失败返回-1，其他错误自行定义
      */
-    fail(-1, "失败"),
+    FAIL(-1, "失败"),
 
     /**
      * 异常返回-100，其他异常自行定义
      */
-    exception(-100, "异常");
+    EXCEPTION(-100, "异常");
 
     @Getter
     private Integer code;
@@ -30,7 +30,7 @@ public enum ResponseCode {
     @Getter
     private String msg;
 
-    ResponseCode(Integer code, String msg) {
+    ResponseCodeEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
