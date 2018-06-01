@@ -29,6 +29,10 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 返回成功
+     * @return
+     */
     public static JsonResponse success() {
         return success(null, null);
     }
@@ -41,12 +45,33 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
         JsonResponse response = new JsonResponse();
         response.put("success", true);
         response.put("code", ResponseCode.success.getCode());
-        response.put("data", data);
         response.put("msg", msg);
+        response.put("data", data);
+        return response;
+    }
+
+    /**
+     * 返回错误
+     * @return
+     */
+    public static JsonResponse fail() {
+        return fail(null);
+    }
+
+    public static JsonResponse fail(String msg) {
+        return fail(ResponseCode.fail.getCode(), msg);
+    }
+
+    public static JsonResponse fail(Integer errorCode, String msg) {
+        JsonResponse response = new JsonResponse();
+        response.put("success", false);
+        response.put("code", errorCode);
+        response.put("msg", msg);
+        response.put("data", null);
         return response;
     }
 
     public static void main(String[] args) {
-        System.out.println(JsonResponse.success());
+        System.out.println(JsonResponse.fail());
     }
 }
