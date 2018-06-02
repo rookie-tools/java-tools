@@ -1,8 +1,7 @@
 /**
  * @(#)ListOp.java, 2018-06-02.
  * <p>
- * Copyright 2018 Youdao, Inc. All rights reserved.
- * YOUDAO PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Copyright 2018 Stalary.
  */
 package com.rookie.tools.collect;
 
