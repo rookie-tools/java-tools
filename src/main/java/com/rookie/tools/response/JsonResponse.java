@@ -5,6 +5,10 @@
  */
 package com.rookie.tools.response;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -28,6 +32,7 @@ import java.util.Map;
  * @author lirongqian
  * @since 2018/05/31
  */
+@Slf4j
 public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
@@ -129,7 +134,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
             return (Map<Object, Object>) raw;
         }
         if (raw == null) {
-            // data为null时，则
+            // data为null时，则新建并写入到JsonResponse中
             data = new HashMap<>();
             this.put("data", data);
             return data;
@@ -140,6 +145,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
 
     public static void main(String[] args) {
+        JsonResponse.success();
     }
 
 }
