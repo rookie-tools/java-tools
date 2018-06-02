@@ -68,15 +68,4 @@ public class MapOp {
         return true;
     }
 
-    public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("stalary", 1);
-        map.put("hawk", 3);
-        map.put("claire", 2);
-        Map<String, Integer> map1;
-        map1 = sortByValue(map, true);
-        System.out.println(map1);
-        map1.remove("hawk");
-        System.out.println(mapEqual(map, map1));
-    }
 }
