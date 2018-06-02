@@ -6,6 +6,8 @@
  */
 package com.rookie.tools.collect;
 
+import lombok.NonNull;
+
 import java.util.*;
 
 /**
@@ -18,12 +20,12 @@ import java.util.*;
 public class MapOp {
 
     /**
-     * 对值进行排序
+     * 按值进行排序
      * @param map
-     * @param reverse
+     * @param reverse 是否反转
      * @param <K>
      * @param <V>
-     * @return
+     * @return 排序后的map
      */
     @SuppressWarnings("unchecked")
     public static <K, V> Map<K, V> sortByValue(Map<K, V> map, final boolean reverse) {
@@ -44,13 +46,37 @@ public class MapOp {
         return result;
     }
 
+    /**
+     * 判断两个Map是否相等，注意第一个map不能为null
+     * @return true/false
+     */
+    public static <K, V> boolean mapEqual(@NonNull Map<K, V> map1, Map<K, V> map2) {
+        if (map2 == null) {
+            return false;
+        }
+        if (map1.size() != map2.size()) {
+            return false;
+        }
+        for (Map.Entry<K, V> entry : map1.entrySet()) {
+            if (!map2.containsKey(entry.getKey())) {
+                return false;
+            }
+            if (!entry.getValue().equals(map2.get(entry.getKey()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Map<String, Integer> map = new HashMap<>();
         map.put("stalary", 1);
         map.put("hawk", 3);
         map.put("claire", 2);
-        System.out.println(map);
-        map = sortByValue(map, true);
-        System.out.println(map);
+        Map<String, Integer> map1;
+        map1 = sortByValue(map, true);
+        System.out.println(map1);
+        map1.remove("hawk");
+        System.out.println(mapEqual(map, map1));
     }
 }
