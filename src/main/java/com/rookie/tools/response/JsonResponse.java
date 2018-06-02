@@ -5,9 +5,7 @@
  */
 package com.rookie.tools.response;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -43,7 +41,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
     /**
      * 返回成功
      *
-     * @return
+     * @return JsonResponse
      */
     public static JsonResponse success() {
         return success(null, null);
@@ -65,7 +63,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
     /**
      * 返回错误
      *
-     * @return
+     * @return JsonResponse
      */
     public static JsonResponse fail() {
         return fail(null);
@@ -86,6 +84,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 返回异常
+     * @return JsonResponse
      */
     public static JsonResponse exception(Exception e) {
         return exception(ResponseCodeEnum.EXCEPTION.getCode(), e);
@@ -106,7 +105,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
     /**
      * 获取data中的数据
      *
-     * @return
+     * @return Object
      */
     public Object getData() {
         return this.get("data");
@@ -114,6 +113,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 设置data中的数据
+     * @return JsonResponse
      */
     public JsonResponse dataPut(String key, Object value) {
         mapData().put(key, value);
