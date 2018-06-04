@@ -28,7 +28,10 @@ public class ListOp {
      * @return 去重后的list
      */
     public static <T> List<T> distinctList(@NonNull List<T> list) {
-        return list.stream().distinct().collect(Collectors.toList());
+        return list
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     /**
