@@ -143,9 +143,4 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
                 + "] is not instanceof map, can not put");
     }
 
-
-    public static void main(String[] args) {
-        JsonResponse.success();
-    }
-
 }

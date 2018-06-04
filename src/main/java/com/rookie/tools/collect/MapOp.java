@@ -1,8 +1,7 @@
 /**
- * @(#)MapOp.java, 2018-06-01.
+ * @(#)ListOp.java, 2018-06-01.
  * <p>
- * Copyright 2018 Youdao, Inc. All rights reserved.
- * YOUDAO PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * Copyright 2018 Stalary.
  */
 package com.rookie.tools.collect;
 
@@ -68,15 +67,4 @@ public class MapOp {
         return true;
     }
 
-    public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("stalary", 1);
-        map.put("hawk", 3);
-        map.put("claire", 2);
-        Map<String, Integer> map1;
-        map1 = sortByValue(map, true);
-        System.out.println(map1);
-        map1.remove("hawk");
-        System.out.println(mapEqual(map, map1));
-    }
 }
