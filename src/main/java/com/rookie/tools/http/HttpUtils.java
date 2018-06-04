@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * HttpUtils
- * 获取请求地址的工具类
+ *http操作的工具类
  * @author lirongqian
  * @since 2018/06/04
  */
@@ -30,6 +30,12 @@ import javax.servlet.http.HttpServletRequest;
 public class HttpUtils {
 
     private static final String UNKNOWN = "unknown";
+
+    private static final String COUNTRY = "country";
+
+    private static final String PROVINVE = "province";
+
+    private static final String CITY = "city";
 
     /**
      * 通过新浪的api获取ip对应的地址
@@ -75,7 +81,7 @@ public class HttpUtils {
             try (CloseableHttpResponse response = HttpClient.post(httpPost)) {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode != HttpStatus.SC_OK) {
-                    log.warn("post failed with code:" + statusCode);
+                    log.warn("post fail with code:" + statusCode);
                 }
                 HttpEntity entity = response.getEntity();
                 String responseStr = EntityUtils.toString(entity);
@@ -83,7 +89,7 @@ public class HttpUtils {
                 log.info("httpJsonPost: " + url + "; " + responseStr);
                 return responseStr;
             } catch (Exception e) {
-                log.warn("httpJsonPost failure!", e);
+                log.warn("httpJsonPost fail!", e);
             }
         } catch (Exception e) {
             log.warn("httpJsonPost Exception!", e);
@@ -143,12 +149,17 @@ public class HttpUtils {
             log.warn("get address error! " + request.getPathInfo());
             return null;
         }
+        // 当不包含country即非正常返回
+        if (!str.contains(COUNTRY)) {
+            log.warn("get address error! " + request.getPathInfo());
+            return null;
+        }
         JSONObject jsonObject = JSON.parseObject(str);
-        return jsonObject.getString("country") +
+        return jsonObject.getString(COUNTRY) +
                 ":" +
-                jsonObject.getString("province") +
+                jsonObject.getString(PROVINVE) +
                 ":" +
-                jsonObject.getString("city");
+                jsonObject.getString(CITY);
     }
 
 }

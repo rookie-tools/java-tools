@@ -6,10 +6,7 @@
 package com.rookie.tools.http;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.fluent.Content;
-import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -49,24 +46,11 @@ public class HttpClient {
                 .build();
     }
 
-    public static String get(String url) {
-        try {
-            Content content = Request.Get(url)
-                    .connectTimeout(2000)
-                    .socketTimeout(2000)
-                    .execute().returnContent();
-            return IOUtils.toString(content.asStream(), "UTF-8");
-        } catch (Exception e) {
-            log.warn("Http Get Exception", e);
-        }
-        return null;
-    }
-
-    public static CloseableHttpResponse post(HttpPost httpPost) throws IOException {
+    static CloseableHttpResponse post(HttpPost httpPost) throws IOException {
         return client.execute(httpPost);
     }
 
-    public static CloseableHttpResponse get(HttpGet httpGet) throws IOException {
+    static CloseableHttpResponse get(HttpGet httpGet) throws IOException {
         return client.execute(httpGet);
     }
 }
