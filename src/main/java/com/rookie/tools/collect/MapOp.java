@@ -20,6 +20,7 @@ public class MapOp {
 
     /**
      * 按值进行排序
+     *
      * @param map
      * @param reverse 是否反转
      * @param <K>
@@ -47,6 +48,7 @@ public class MapOp {
 
     /**
      * 判断两个Map是否相等，注意第一个map不能为null
+     *
      * @return true/false
      */
     public static <K, V> boolean mapEqual(@NonNull Map<K, V> map1, Map<K, V> map2) {

@@ -84,6 +84,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 返回异常
+     *
      * @return JsonResponse
      */
     public static JsonResponse exception(Exception e) {
@@ -113,6 +114,7 @@ public class JsonResponse extends LinkedHashMap<String, Object> {
 
     /**
      * 设置data中的数据
+     *
      * @return JsonResponse
      */
     public JsonResponse dataPut(String key, Object value) {
