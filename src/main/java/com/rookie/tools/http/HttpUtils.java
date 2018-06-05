@@ -33,7 +33,7 @@ public class HttpUtils {
 
     private static final String COUNTRY = "country";
 
-    private static final String PROVINVE = "province";
+    private static final String PROVINCE = "province";
 
     private static final String CITY = "city";
 
@@ -157,7 +157,7 @@ public class HttpUtils {
         JSONObject jsonObject = JSON.parseObject(str);
         return jsonObject.getString(COUNTRY) +
                 ":" +
-                jsonObject.getString(PROVINVE) +
+                jsonObject.getString(PROVINCE) +
                 ":" +
                 jsonObject.getString(CITY);
     }
